@@ -6,6 +6,8 @@ const { pool } = require('./config/db');
 
 app.use(express.json());
 
+const authRouter = require('./routes/auth');
+
 app.get('/health/db', async (req, res) => {
     try {
         const result = await pool.query('SELECT NOW()');
