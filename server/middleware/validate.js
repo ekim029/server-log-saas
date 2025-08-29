@@ -7,15 +7,15 @@ function validate(req, res, next) {
     }
 
     if (typeof level !== 'string' || !level.trim()) {
-        return res.status(400).json({ error: 'message is required to be string' });
+        return res.status(400).json({ error: 'level is required to be string' });
     }
 
     if (typeof source !== 'string' || !source.trim()) {
-        return res.status(400).json({ error: 'message is required to be string' });
+        return res.status(400).json({ error: 'source is required to be string' });
     }
 
     if (typeof metadata !== 'string' || !metadata.trim()) {
-        return res.status(400).json({ error: 'message is required to be string' });
+        return res.status(400).json({ error: 'metadata is required to be string' });
     }
 
     next();
