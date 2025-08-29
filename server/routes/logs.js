@@ -3,8 +3,9 @@ const express = require('express');
 const router = express.Router();
 const { pool } = require('../config/db');
 const { authMiddleware, adminOnly } = require('../middleware/auth');
+const validate = require('../middleware/validate');
 
-router.post('/', authMiddleware, adminOnly, async (req, res) => {
+router.post('/', authMiddleware, adminOnly, validate, async (req, res) => {
     const { message, level, source, metadata } = req.body;
 
     try {
