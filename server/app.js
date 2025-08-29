@@ -7,6 +7,12 @@ const { pool } = require('./config/db');
 app.use(express.json());
 
 const authRouter = require('./routes/auth');
+const logRouter = require('./routes/logs');
+const logWatcher = require("./logWatcher");
+
+app.use('/auth', authRouter);
+app.use('/logs', logRouter);
+logWatcher();
 
 app.get('/health/db', async (req, res) => {
     try {
