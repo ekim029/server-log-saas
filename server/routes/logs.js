@@ -37,4 +37,19 @@ router.get('/logs', async (req, res) => {
     }
 });
 
+router.get('/aggregate/level', async (req, res) => {
+    try {
+        const result = await pool.query(
+            `SELECT level, COUNT(*) as count
+            FROM logs
+            GROUP BY level
+            ORDER BY count DESC`
+        );
+        res.status(200).json(result.rows);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: err.message });
+    }
+});
+
 module.exports = router;
