@@ -22,4 +22,19 @@ router.post('/', authMiddleware, adminOnly, validate, async (req, res) => {
     }
 });
 
+router.get('/logs', async (req, res) => {
+    try {
+        const result = await pool.query(
+            `SELECT id, timestamp, level, source, message, metadata, user_id
+            FROM logs 
+            ORDER BY timestamp desc`
+        );
+        res.status(200).json(result.rows)
+
+    } catch (err) {
+        console.error(err);
+        res.status(400).json({ error: err.message });
+    }
+});
+
 module.exports = router;
