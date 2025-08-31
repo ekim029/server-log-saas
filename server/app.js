@@ -8,7 +8,7 @@ app.use(express.json());
 
 const authRouter = require('./routes/auth');
 const logRouter = require('./routes/logs');
-const logWatcher = require("./logWatcher");
+const logWatcher = require("./services/logWatcher");
 
 app.use('/auth', authRouter);
 app.use('/logs', logRouter);
