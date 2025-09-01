@@ -25,9 +25,9 @@ router.post('/', authMiddleware, adminOnly, validate, async (req, res) => {
 router.get('/logs', async (req, res) => {
     try {
         const result = await pool.query(
-            `SELECT id, timestamp, level, source, message, metadata, user_id
+            `SELECT id, ts, level, source, message, metadata, user_id
             FROM logs 
-            ORDER BY timestamp desc`
+            ORDER BY ts desc`
         );
         res.status(200).json(result.rows)
 
