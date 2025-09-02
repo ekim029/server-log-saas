@@ -24,11 +24,11 @@ function Upload() {
         setLoading(true);
         setError(null);
 
-        try {
-            let metadataParsed = formData.metadata ? JSON.parse(formData.metadata) : {};
+        let metadataParsed = formData.metadata && formData.metadata !== '' ? JSON.parse(formData.metadata) : {};
+        const token = localStorage.getItem('token');
 
-            const token = localStorage.getItem('token');
-            await axios.post(`${process.env.REACT_APP_API_BASE_URL}`, {
+        try {
+            await axios.post(`${process.env.REACT_APP_API_BASE_URL}/logs`, {
                 message: formData.message,
                 level: formData.level,
                 source: formData.source,

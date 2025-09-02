@@ -14,7 +14,7 @@ function validate(req, res, next) {
         return res.status(400).json({ error: 'source is required to be string' });
     }
 
-    if (typeof metadata !== 'string' || !metadata.trim()) {
+    if (metadata && typeof metadata !== 'string' && typeof metadata !== 'object') {
         return res.status(400).json({ error: 'metadata is required to be string' });
     }
 
