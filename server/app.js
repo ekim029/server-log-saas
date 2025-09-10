@@ -4,6 +4,7 @@ const cors = require('cors');
 
 require('dotenv').config();
 const { pool } = require('./config/db');
+const { producer } = require('./kafka/producer');
 
 app.use(express.json());
 app.use(cors());
@@ -28,4 +29,9 @@ app.get('/health/db', async (req, res) => {
 
 app.listen(process.env.PORT, () => {
     console.log(`Listening to port ${process.env.PORT}`);
+})
+
+process.on('SIGINT', async () => {
+    await producer.disconnect();
+    process.exit(0);
 })
