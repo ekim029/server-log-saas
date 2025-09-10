@@ -8,7 +8,11 @@ const produce = require('../kafka/producer');
 
 router.post('/', authMiddleware, adminOnly, validate, async (req, res) => {
     try {
-        await produce(req.body);
+        const log = {
+            ...req.body,
+            userId: req.user.id
+        }
+        await produce(log);
         res.status(201).json({ status: 'Log processing' });
     } catch (err) {
         console.error(err);
